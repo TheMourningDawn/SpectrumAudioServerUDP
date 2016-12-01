@@ -1,2 +1,2 @@
-# SpecrumAudioServerUDP
-Sends audio spectrum data from a Spectrum shield to multicast UDP
+# SpectrumAudioServerUDP
+Sends audio spectrum data from a Sparkfun Spectrum shield over multicast UDP
