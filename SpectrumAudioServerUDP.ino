@@ -11,8 +11,10 @@ UDP udpMulticast;
 int port = 32555;
 IPAddress remoteIP(239,1,1,234);
 
+SYSTEM_THREAD(ENABLED);
+
 void setup() {
-    Serial.begin(9600);
+    /*Serial.begin(11520);*/
 
     udpMulticast.begin(0);
 
@@ -21,17 +23,14 @@ void setup() {
 }
 
 void loop() {
+   delay(20);
    spectrum->readAudioFrequencies();
    for(int i=0;i<BUFFER_SIZE;i+=2) {
         spectrumAsBytes[i] = spectrum->frequenciesLeft[i/2] >> 8;
         spectrumAsBytes[i+1] = spectrum->frequenciesLeft[i/2] & 0xFF;
    }
-
-   if(udpMulticast.sendPacket(spectrumAsBytes, BUFFER_SIZE, remoteIP, port) > 0) {
-       Serial.print(".");
-   } else {
-       Serial.printlnf("send failed");
-       delay(1000);
-       udpMulticast.begin(0);
+   if(udpMulticast.sendPacket(spectrumAsBytes, BUFFER_SIZE, remoteIP, port) < 0) {
+     udpMulticast.begin(0);
    }
+   /*Serial.printlnf("Sent: [%d, %d, %d, %d]", spectrum->frequenciesLeft[0],spectrum->frequenciesLeft[2],spectrum->frequenciesLeft[4],spectrum->frequenciesLeft[6]);*/
 }

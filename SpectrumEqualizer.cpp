@@ -23,9 +23,9 @@ void SpectrumEqualizer::readAudioFrequencies() {
         digitalWrite(STROBE_PIN, LOW); // go to the next band
         delayMicroseconds(50); // gather some data
         frequenciesLeft[band] = analogRead(LEFT_EQ_PIN);
-        frequenciesRight[band] = analogRead(RIGHT_EQ_PIN);
         digitalWrite(STROBE_PIN, HIGH); // reset the strobe pin
     }
+    // Serial.printlnf("Just read: [%d, %d, %d, %d]", frequenciesLeft[0],frequenciesLeft[2],frequenciesLeft[4],frequenciesLeft[6]);
 }
 
 #endif

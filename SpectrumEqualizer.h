@@ -11,7 +11,6 @@
 class SpectrumEqualizer {
     public:
         int frequenciesLeft[7];
-        int frequenciesRight[7];
 
         SpectrumEqualizer();
         void init();
